@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1563390340 source:c:\users\neto\desktop\projetopos1\projetopos1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<math.h>
+	<conio.h>
+
