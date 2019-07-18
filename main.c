@@ -22,12 +22,18 @@ int main()
     int val3;
     float val4;
     int val5;
-    float valorProduto = 0;
+    int val6;
+    float valorProdutoAV = 0;
+    float valorProdutoPA = 0;
+    float valorProdutoDE = 0;
+    float valorProdutoSOMA = 0;
     char numCart[14];
     int length;
     int numParce;
     int numConta;
     int senhaConta;
+    int prodVend;
+
 
 
     //IDENTIFICADOR DO TERMINAL
@@ -45,6 +51,7 @@ int main()
     char label[30] = "CREDITO A VISTA";
     float vMIn = 10.00;
     float vMAX = 1000.00;
+    int quantProd1 = 5;
 
     //PRODUTO2PARCELADO
     char idP2[3] = "b";
@@ -52,6 +59,7 @@ int main()
     char labelP2[30] = "CREDITO PARCELADO";
     float vMInP2 = 10.00;
     float vMAXP2 = 10000.00;
+    int quantProd2 = 8;
 
     //PRODUTO3DEBITO
     char idD[3] = "c";
@@ -59,6 +67,7 @@ int main()
     char labelD[30] = "DEBITO";
     float vMInD = 0;
     float vMAXD = 0;
+    int quantProd3 = 10;
 
 
     while(true){
@@ -76,11 +85,11 @@ int main()
             if (val2 == 1){
                 printf("\t <VENDA CREDITO A VISTA> \n\n");
                 printf("Valor do produto (R$) \n");
-                scanf("%f", &valorProduto);
-                if (valorProduto < vMIn){
+                scanf("%f", &valorProdutoAV);
+                if (valorProdutoAV < vMIn){
                     printf("Valor Menor que o Minimo");
                     break;
-                } else if(valorProduto > vMAX) {
+                } else if(valorProdutoAV > vMAX) {
                     printf("Valor maior que o Maximo.");
                     break;
                 } else {
@@ -99,11 +108,14 @@ int main()
                             printf("Operação Cancelada \n");
                             break;
                         } else {
+                            quantProd1 = --quantProd1;
+                            prodVend = prodVend+1;
+                            valorProdutoSOMA =+ valorProdutoAV;
                             printf("Venda Realizada com Sucesso \n\n\n");
                             printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d", razaoSocial, adress, CNPJ, day, month, year);
                             printf(" \t TERMINAL: %s \n <%s> \n <%s> \n\n", identifier, label, numCart);
-                            printf("VALOR APROVADO: R$ <%2.f>", valorProduto);
-                            printf("\n\n\n <%s \n\n>", rodapeSale);
+                            printf("VALOR APROVADO: R$ <%2.f>", valorProdutoAV);
+                            printf("\n\n\n <%s> \n\n", rodapeSale);
                             continue;
                         }
                     }
@@ -113,13 +125,13 @@ int main()
                 //PARCELADO
                 printf("\t <VENDA PARCELADO> \n\n");
                 printf("Valor do produto (R$) \n");
-                scanf("%f", &valorProduto);
+                scanf("%f", &valorProdutoPA);
                 printf("Numero de Parcelas Desejadas \n");
                 scanf("%d", &numParce);
-                if (valorProduto < vMInP2){
+                if (valorProdutoPA < vMInP2){
                     printf("Valor Menor que o Minimo");
                     break;
-                } else if(valorProduto > vMAXP2) {
+                } else if(valorProdutoPA > vMAXP2) {
                     printf("Valor maior que o Maximo.");
                     break;
                 } else {
@@ -138,10 +150,13 @@ int main()
                             printf("Operação Cancelada \n");
                             break;
                         } else {
+                            quantProd2 = --quantProd2;
+                            prodVend = prodVend+1;
+                            valorProdutoSOMA =+ valorProdutoPA;
                             printf("Venda Realizada com Sucesso \n\n\n");
                             printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d", razaoSocial, adress, CNPJ, day, month, year);
                             printf(" \t TERMINAL: %s \n <%s> \n <%s> \n\n", identifier, labelP2, numCart);
-                            val4 = (valorProduto/numParce);
+                            val4 = (valorProdutoPA/numParce);
                             printf("VALOR APROVADO: R$ <%2.f> X %d", val4, numParce);
                             printf("\n\n\n <%s> \n\n", rodapeSale);
                             continue;
@@ -154,7 +169,7 @@ int main()
                 //DEBITO
                 printf("\t <VENDA DEBITO> \n\n");
                 printf("Valor do produto (R$) \n");
-                scanf("%f", &valorProduto);
+                scanf("%f", &valorProdutoDE);
                 printf("\t <VENDA DEBITO> \n\n");
                 printf("Digite numero da conta\n");
                 scanf("%d", &numConta);
@@ -167,30 +182,35 @@ int main()
                             printf("Operação Cancelada \n");
                             break;
                         } else {
+                            quantProd3 = --quantProd3;
+                            prodVend = prodVend+1;
+                            valorProdutoSOMA =+ valorProdutoDE;
                             printf("Venda Realizada com Sucesso \n\n\n");
                             printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d", razaoSocial, adress, CNPJ, day, month, year);
                             printf(" \t TERMINAL: %s \n <%s> \n <%d> \n\n", identifier, labelD, numConta);
-                            printf("VALOR APROVADO: R$ <%2.f>", valorProduto);
+                            printf("VALOR APROVADO: R$ <%2.f>", valorProdutoDE);
                             printf("\n\n\n <%s> \n\n", rodapeSale);
                             continue;
                         }
-            }
-
-            val1 = 0;
+			}
+			val1 = 0;
             continue;
-        }else if (val1 == 2) {
+		} else if (val1 == 2) {
             // AREA DE ESTORNO
             printf(" \t <ESTORNO> \n\n");
             printf("Vendas Recentes \n");
-            printf("%d:%d \t R$ %2.f \n", HH, MM, valorProduto);
+            printf("%d:%d \t R$ %2.f \t ID: %s \n", HH, MM, valorProdutoAV,id);
+            printf("%d:%d \t R$ %2.f \t ID: %s \n", HH, MM, valorProdutoPA,id);
+            printf("%d:%d \t R$ %2.f \t ID: %s \n", HH, MM, valorProdutoDE,id);
             printf("Deseja Realizar um Estorno? (Y(1)/N(0)) \n\n");
             scanf("%d", &val5);
             if(val5 == 0){
                 printf("Estorno Cancelado \n");
                 continue;
             } else {
-                //ERRO PULANDO DIRETO PARA O ESTORNO DO CREDITO
-                if (labelD == labelD[0]){
+                printf("Tipo de Estorno que deseja efetuar? \n 1 - DEBITO \t 2 - A VISTA \t 3 - PARCELADO \n");
+                scanf("%d", &val6);
+                if (val6 == 1){
                     printf("Data da Compra: (%d//%d//%d) \n", day, month, year);
                     scanf("");
                     if(today == day) {
@@ -198,52 +218,66 @@ int main()
                         printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d", razaoSocial, adress, CNPJ, day, month, year);
                         printf("%d//%d//%d \t %d:%d:%d \t %s \n", day, month, year, HH, MM, SS, identifier);
                         printf("ESTORNO <%s> \t %s \n", labelD, numCart);
-                        printf(" VALOR CANCELADO: \t <R$> %2.f \n", valorProduto);
+                        printf(" VALOR CANCELADO: \t <R$> %2.f \n", valorProdutoDE);
                         printf("\n\n\n <%s> \n\n", rodapeSale);
-                        printf("aqui");
                         continue;
                     } else {
                         printf("Estorno nao pode ser efetuado");
                         continue;
                     }
 
-                } else {
+                } else if(val6 == 2) {
                     printf("Data da Compra: (%d//%d//%d) \n", day, month, year);
                     if (today < day+5 ){
-                        printf("Estorno Realizado com Sucesso \n\n\n");
-                        printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d", razaoSocial, adress, CNPJ, day, month, year);
-                        printf("%d//%d//%d \t %d:%d:%d \t %s \n", day, month, year, HH, MM, SS, identifier);
-                        printf("ESTORNO <%s> \t %s \n", label, numCart);
-                        printf(" VALOR CANCELADO: \t <R$> %2.f \n", valorProduto);
-                        printf("\n\n\n <%s> \n\n", rodapeSale);
-                        continue;
-                    } else {
-                        printf("Estorno não pode ser efetuado");
-                        continue;
+                            printf("Estorno Realizado com Sucesso \n\n\n");
+                            printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d", razaoSocial, adress, CNPJ, day, month, year);
+                            printf("%d//%d//%d \t %d:%d:%d \t %s \n", day, month, year, HH, MM, SS, identifier);
+                            printf("ESTORNO <%s> \t %s \n", label, numCart);
+                            printf(" VALOR CANCELADO: \t <R$> %2.f \n", valorProdutoAV);
+                            printf("\n\n\n <%s> \n\n", rodapeSale);
+                        } else {
+                            printf("Estorno nao pode ser efetuado");
+                            continue;
+                    }
+                } else if (val6 == 3) {
+                    printf("Data da Compra: (%d//%d//%d) \n", day, month, year);
+                    if (today < day+5) {
+                            printf("Estorno Realizado com Sucesso \n\n\n");
+                            printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d", razaoSocial, adress, CNPJ, day, month, year);
+                            printf("%d//%d//%d \t %d:%d:%d \t %s \n", day, month, year, HH, MM, SS, identifier);
+                            printf("ESTORNO <%s> \t %s \n", label, numCart);
+                            printf(" VALOR CANCELADO: \t <R$> %2.f \n", valorProdutoPA);
+                            printf("\n\n\n <%s> \n\n", rodapeSale);
+                        } else {
+                            printf("Estorno nao pode ser efetuado");
+                            continue;
+
                     }
                 }
             }
-
-
-
-
-
             val1 = 0;
             continue;
-        }else if (val1 == 3){
+        } else if (val1 == 3){
             printf("AREA DE RELATORIO \n");
+            printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d \t", razaoSocial, adress, CNPJ);
+            printf("%d/%d/%d \t %d:%d:%d \t %s \n", day, month, year, HH, MM, SS, identifier);
+            printf("<%s> \n QNT: <%d> \t VALOR: R$ <%2.f> \n", label, quantProd1, valorProdutoAV);
+            printf("<%s> \n QNT: <%d> \t VALOR: R$ <%2.f> \n", labelP2, quantProd2, valorProdutoPA);
+            printf("<%s> \n QNT: <%d> \t VALOR: R$ <%2.f> \n", labelD, quantProd3, valorProdutoDE);
+
+            printf("-------------------- TOTAL --------------------");
+            printf("\n QNT: <%d> \t VALOR: R$ <%f> \n", prodVend, valorProdutoSOMA);
+
+
+
             val1 = 0;
             continue;
-        }else{
-            printf("AREA DE ERRO");
+		} else {
+			printf("AREA DE ERRO");
             break;
-        }
-    }
+		}
 
-
-
-
-
-
-    return 0;
+	}
+	return 0;
 }
+
