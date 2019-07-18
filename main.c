@@ -12,6 +12,7 @@ int main()
     int terminalID = 123456789;
     int day = 30;
     int month = 12;
+    int year = 2019;
     int HH = 13;
     int MM = 30;
     int val1;
@@ -20,6 +21,15 @@ int main()
     float valorProduto;
     char numCart[14];
     int length;
+
+
+    //IDENTIFICADOR DO TERMINAL
+    char identifier[10] = "TEM001";
+    char adress [100] = "Av. Rui Carneiro, 300. Miramar.";
+    char CNPJ [15] = "21505538000128";
+    char razaoSocial [20] = "Phoebus Tecnologia";
+    char rodapeSale [300] = "A Phoebus é uma empresa que atua no mercado de meios de pagamentos há 18 anos. Ela é pioneira na criação do primeiro sistema de pagamento de contas utilizando terminais POS";
+    char rodapeRever [100] = "";
 
 
     //PRODUTO1
@@ -67,9 +77,10 @@ int main()
                             break;
                         } else {
                             printf("Venda Realizada com Sucesso \n\n\n");
-                            printf("\t <RAZAO SOCIAL> \n\t <ENDERECO> \n\t CNPJ: <CNPJ> \n DATA: DD/MM/AAAA \t TERMINAL: TTTTTT \n <ROTULO DO PRODUTO> \n <NUMERO DO CARTAO> \n");
-                            printf("VALOR APROVADO: <VALOR> R$<VALOR>");
-                            printf("\n\n <mensagem de rodape>");
+                            printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d", razaoSocial, adress, CNPJ, day, month, year);
+                            printf(" \t TERMINAL: %s \n <%s> \n <%s> \n\n", identifier, label, numCart);
+                            printf("VALOR APROVADO: R$ <%2.f>", valorProduto);
+                            printf("\n\n\n <%s>", rodapeSale);
                         }
                     }
                 }
