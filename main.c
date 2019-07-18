@@ -18,9 +18,11 @@ int main()
     int val1;
     int val2;
     int val3;
+    float val4;
     float valorProduto;
     char numCart[14];
     int length;
+    int numParce;
 
 
     //IDENTIFICADOR DO TERMINAL
@@ -39,6 +41,12 @@ int main()
     float vMIn = 10.00;
     float vMAX = 1000.00;
 
+    //PRODUTO2
+    char idP2[3] = "b";
+    int typeP2 = 2;
+    char labelP2[30] = "CREDITO PARCELADO";
+    float vMInP2 = 10.00;
+    float vMAXP2 = 10000.00;
 
     printf("<%d> %d//%d %d:%d", terminalID, day, month, HH, MM);
     printf("\n <RAZAO SOCIAL> \n\n");
@@ -54,7 +62,7 @@ int main()
             scanf("%d", &val2);
             if (val2 == 1){
                 printf("\t <VENDA CREDITO A VISTA> \n\n");
-                printf("Valor do produto\n");
+                printf("Valor do produto (R$) \n");
                 scanf("%f", &valorProduto);
                 if (valorProduto < vMIn){
                     printf("Valor Menor que o Minimo");
@@ -63,6 +71,7 @@ int main()
                     printf("Valor maior que o Maximo.");
                     break;
                 } else {
+                    printf("\t <VENDA CREDITO A VISTA> \n\n");
                     printf("Digite o numero do cartao\n");
                     scanf("%s", numCart);
                     length = strlen(numCart);
@@ -70,7 +79,8 @@ int main()
                         printf("Numero de cartao invalido\n");
                         break;
                     } else {
-                        printf("Deseja Efetuar a venda? (Y(1)/N(0) \n");
+                        printf("\t <VENDA CREDITO A VISTA> \n\n");
+                        printf("Deseja confirmar a venda? (Y(1)/N(0) \n");
                         scanf("%d", &val3);
                          if(val3 == 0) {
                             printf("Operação Cancelada \n");
@@ -80,11 +90,52 @@ int main()
                             printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d", razaoSocial, adress, CNPJ, day, month, year);
                             printf(" \t TERMINAL: %s \n <%s> \n <%s> \n\n", identifier, label, numCart);
                             printf("VALOR APROVADO: R$ <%2.f>", valorProduto);
-                            printf("\n\n\n <%s>", rodapeSale);
+                            printf("\n\n\n <%s \n\n>", rodapeSale);
+                            continue;
                         }
                     }
                 }
                 //printf("VALOR (R$) \n %f", &valorProduto);
+            } else if(val2 == 2) {
+                printf("\t <VENDA PARCELADO> \n\n");
+                printf("Valor do produto (R$) \n");
+                scanf("%f", &valorProduto);
+                printf("Numero de Parcelas Desejadas \n");
+                scanf("%d", &numParce);
+                if (valorProduto < vMInP2){
+                    printf("Valor Menor que o Minimo");
+                    break;
+                } else if(valorProduto > vMAXP2) {
+                    printf("Valor maior que o Maximo.");
+                    break;
+                } else {
+                    printf("\t <VENDA PARCELADA> \n\n");
+                    printf("Digite o numero do cartao\n");
+                    scanf("%s", numCart);
+                    length = strlen(numCart);
+                    if (length > 14 || length < 11){
+                        printf("Numero de cartao invalido\n");
+                        break;
+                    } else {
+                        printf("\t <VENDA PARCELADA> \n\n");
+                        printf("Deseja confirmar a venda? (Y(1)/N(0) \n");
+                        scanf("%d", &val3);
+                        if(val3 == 0) {
+                            printf("Operação Cancelada \n");
+                            break;
+                        } else {
+                            printf("Venda Realizada com Sucesso \n\n\n");
+                            printf("\t <%s> \n\t <%s> \n\t CNPJ: <%s> \n DATA: %d/%d/%d", razaoSocial, adress, CNPJ, day, month, year);
+                            printf(" \t TERMINAL: %s \n <%s> \n <%s> \n\n", identifier, labelP2, numCart);
+                            val4 = (valorProduto/numParce);
+                            printf("VALOR APROVADO: R$ <%2.f> X %d", val4, numParce);
+                            printf("\n\n\n <%s> \n\n", rodapeSale);
+                            continue;
+                        }
+
+                    }
+                }
+
             }
 
             val1 = 0;
